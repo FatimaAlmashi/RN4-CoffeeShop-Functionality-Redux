@@ -5,6 +5,9 @@ import CoffeeDetail from "../Components/CoffeeDetail/index";
 import CoffeeCart from "../Components/CoffeeCart/index";
 import Login from "../Components/Login/index";
 
+// BottomNav
+import BottomNav from "./BottomNav";
+
 const ourStack = createStackNavigator(
   {
     List: CoffeeList,
@@ -29,6 +32,6 @@ const ourStack = createStackNavigator(
   }
 );
 
-const AppContainer = createAppContainer(ourStack);
+const AppContainer = createAppContainer(BottomNav);
 
 export default AppContainer;
