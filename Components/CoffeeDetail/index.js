@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Icon } from "native-base";
 
 // NativeBase Components
 import {
@@ -22,6 +23,21 @@ import styles from "./styles";
 import coffeeshops from "../CoffeeList/list";
 
 class CoffeeDetail extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam("coffeeShop").name,
+      // headerLeft: null,
+      headerRight: (
+        <Icon
+          name="shoppingcart"
+          type="AntDesign"
+          style={{ color: "white" }}
+          onPress={() => navigation.navigate("Cart")}
+        />
+      )
+    };
+  };
+
   state = {
     drink: "Cappuccino",
     option: "Small"
@@ -40,9 +56,12 @@ class CoffeeDetail extends Component {
   };
 
   render() {
-    const { coffeeShops, loading } = this.props.coffeeReducer;
+    let coffeeshop = this.props.navigation.getParam("coffeeShop");
+    const { loading } = this.props.coffeeReducer;
+    // const { coffeeShops, loading } = this.props.coffeeReducer;
+
     if (loading) return <Content />;
-    const coffeeshop = coffeeShops[0];
+    // const coffeeshop = coffeeShops[0];
     return (
       <Content>
         <List>
@@ -55,7 +74,7 @@ class CoffeeDetail extends Component {
             </Left>
             <Body />
             <Right>
-              <Thumbnail bordered source={coffeeshop.img} />
+              <Thumbnail bordered source={{ uri: coffeeshop.img }} />
             </Right>
           </ListItem>
           <ListItem style={{ borderBottomWidth: 0 }}>

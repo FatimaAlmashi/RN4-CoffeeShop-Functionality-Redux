@@ -9,8 +9,11 @@ import styles from "./styles";
 
 class CoffeeItem extends Component {
   handlePress = () => {
-    alert("Pressed");
+    this.props.navigation.navigate("Detail", {
+      coffeeShop: this.props.coffeeShop
+    });
   };
+
   render() {
     const { coffeeShop } = this.props;
     return (
@@ -19,7 +22,11 @@ class CoffeeItem extends Component {
         style={styles.background}
       >
         <View style={styles.overlay} />
-        <ListItem button style={styles.listitem}>
+        <ListItem
+          button
+          style={styles.listitem}
+          onPress={() => this.handlePress()}
+        >
           <Card style={styles.transparent}>
             <CardItem style={styles.transparent}>
               <Left>

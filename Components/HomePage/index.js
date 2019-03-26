@@ -17,7 +17,21 @@ import Login from "../Login";
 // Actions
 import { getCoffeeShops } from "../../store/actions/coffeeActions";
 
+// Navigations
+import AppContainer from "../../Navigation/index";
+
 class HomePage extends Component {
+  static navigationOptions = {
+    title: "Home",
+    headerTintColor: "white",
+    headerStyle: {
+      backgroundColor: "rgb(20,90,100)"
+    },
+    headerTextStyle: {
+      fontWeight: "bold"
+    }
+  };
+
   componentDidMount() {
     this.props.getCoffeeShops();
   }
@@ -25,8 +39,7 @@ class HomePage extends Component {
     return (
       <Container style={styles.transparent}>
         <View style={styles.overlay} />
-        <Header style={styles.transparent} />
-        <CoffeeList />
+        <AppContainer />
       </Container>
     );
   }
