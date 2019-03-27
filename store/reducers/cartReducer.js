@@ -1,19 +1,7 @@
 import * as actionTypes from "../actions/types";
-
 const initialState = {
-  items: [
-    {
-      drink: "Latte",
-      option: "Small",
-      quantity: 1
-    },
-    {
-      drink: "Espresso",
-      option: "Large",
-      quantity: 1
-    }
-  ],
-  totalQuentity: 2
+  items: [],
+  totalQuentity: 0
 };
 
 const cartReducer = (state = initialState, action) => {
