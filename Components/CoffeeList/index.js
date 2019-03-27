@@ -8,20 +8,14 @@ import coffeeshops from "./list";
 
 // Component
 import CoffeeItem from "./CoffeeItem";
+import CartButton from "../CartButton";
 
 class CoffeeList extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: "Coffee List",
       headerLeft: null,
-      headerRight: (
-        <Icon
-          name="shoppingcart"
-          type="AntDesign"
-          style={{ color: "white" }}
-          onPress={() => navigation.navigate("Cart")}
-        />
-      )
+      headerRight: <CartButton />
     };
   };
 

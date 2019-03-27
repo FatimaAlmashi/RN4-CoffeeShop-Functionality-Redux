@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Icon } from "native-base";
+import CartButton from "../CartButton";
+import * as actionCreators from "../../store/actions/cartActions";
 
 // NativeBase Components
 import {
@@ -26,15 +28,8 @@ class CoffeeDetail extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam("coffeeShop").name,
-      // headerLeft: null,
-      headerRight: (
-        <Icon
-          name="shoppingcart"
-          type="AntDesign"
-          style={{ color: "white" }}
-          onPress={() => navigation.navigate("Cart")}
-        />
-      )
+      headerLeft: null,
+      headerRight: <CartButton />
     };
   };
 
@@ -53,6 +48,14 @@ class CoffeeDetail extends Component {
     this.setState({
       option: value
     });
+  };
+  handleAddButton = () => {
+    let item = {
+      drink: this.state.drink,
+      option: this.state.option,
+      quantity: 1
+    };
+    this.props.addItemToCart(item);
   };
 
   render() {
@@ -105,7 +108,7 @@ class CoffeeDetail extends Component {
               </Picker>
             </Body>
           </ListItem>
-          <Button full danger>
+          <Button full danger onPress={this.handleAddButton}>
             <Text>Add</Text>
           </Button>
         </List>
@@ -118,4 +121,11 @@ const mapStateToProps = state => ({
   coffeeReducer: state.coffeeReducer
 });
 
-export default connect(mapStateToProps)(CoffeeDetail);
+const mapDispatchToProps = dispatch => ({
+  addItemToCart: newItem => dispatch(actionCreators.addItemToCart(newItem))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CoffeeDetail);
